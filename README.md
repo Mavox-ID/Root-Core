@@ -1,6 +1,6 @@
 # Root Core - Terminal Core (Based on Root Core Custom)
 
-![Root Core Version](https://img.shields.io/badge/Version-v7.8-blue?style=for-the-badge&logo=cpu)
+![Root Core Version](https://img.shields.io/badge/Version-WAIT.PLEASE!!!-blue?style=for-the-badge&logo=cpu)
 ![Standard](https://img.shields.io/badge/Standard-CROCI-orange?style=for-the-badge)
 ![FS](https://img.shields.io/badge/Filesystem-RFS-green?style=for-the-badge)
 ![Arch](https://img.shields.io/badge/Arch-x86__64-red?style=for-the-badge)
