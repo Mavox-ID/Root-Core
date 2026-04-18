@@ -1,0 +1,58 @@
+name: Build Root Core
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  sync-and-build:
+    name: Sync main to build branch and Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check Makefile
+        id: check_makefile
+        run: |
+          if [ -f Makefile ] || [ -f makefile ]; then
+            echo "found=true" >> $GITHUB_OUTPUT
+            echo "Makefile found."
+          else
+            echo "found=false" >> $GITHUB_OUTPUT
+            echo "No Makefile found."
+          fi
+
+      - name: Install Dependencies
+        if: steps.check_makefile.outputs.found == 'true'
+        run: |
+          sudo apt update
+          sudo apt install -y gcc binutils make grep coreutils
+
+      - name: Clean build directory
+        if: steps.check_makefile.outputs.found == 'true'
+        run: |
+          make clean || true
+
+      - name: Build Root Core
+        if: steps.check_makefile.outputs.found == 'true'
+        run: |
+          make all
+
+      - name: Commit and push build artifacts
+        if: steps.check_makefile.outputs.found == 'true'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "github-actions@github.com"
+          git checkout -B build
+          git add .
+          git commit -m "Build update from main" || echo "Nothing to commit"
+          git push -f origin build
