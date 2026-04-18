@@ -52,11 +52,4 @@ Root Core breaks away from traditional legacy naming conventions. It introduces 
 
 The project is structured to keep the core, drivers, and user-space interface strictly separated.
 
-```text
-.
-├── boot/            # Multi-stage 16/32/64-bit bootloader
-├── Drivers/         # Hardware drivers (ATA, ACPI, VGA, VBE)
-│   └── rfs/         # RFS (Root File System) driver logic
-├── Kernel/          # The Root Core logic
-│   └── POSIX/       # CROCI implementation layer
-└── tools/           # RFS formatter and host-side utilities
+... WAIT PLEASE ...
