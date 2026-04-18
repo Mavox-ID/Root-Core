@@ -12,7 +12,7 @@ on:
 
 jobs:
   check:
-    name: Check C and Assembly Files (x86_64 OS Dev)
+    name: Check C and Assembly Files
     runs-on: ubuntu-latest
 
     steps:
@@ -35,28 +35,21 @@ jobs:
           done
         fi
 
-    - name: Check GNU Assembly (.s) files
+    - name: Check AT&T Assembly files
       run: |
         FILES=$(find . -name "*.s")
         if [ -z "$FILES" ]; then
-          echo "No .s files found, skipping."
+          echo "No AT&T files found."
         else
           for file in $FILES; do
             as --64 -o /dev/null "$file" || exit 1
           done
         fi
 
-    - name: Check NASM Assembly (.asm) files
+    - name: Run static code analysis
       run: |
-        FILES=$(find . -name "*.asm")
-        if [ -z "$FILES" ]; then
-          echo "No .asm files found, skipping."
+        if [ -z "$(find . -name "*.c" -o -name "*.h")" ]; then
+          echo "No C/H files for cppcheck."
         else
-          for file in $FILES; do
-            nasm -f elf64 "$file" -o /dev/null || exit 1
-          done
+          cppcheck --enable=all --inconclusive --force --quiet --error-exitcode=1 .
         fi
-
-    - name: Run static code analysis (cppcheck)
-      run: |
-        cppcheck --enable=all --inconclusive --force --quiet .
