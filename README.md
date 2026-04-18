@@ -38,10 +38,10 @@ Root Core breaks away from traditional legacy naming conventions. It introduces 
 | `rmdir` | **`rdir`** | Remove a directory |
 | `pwd` | **`path`** | Show current working directory |
 | `touch` | **`zero`** | Create an empty file |
-| `di` | **`di`** | Display disk/partition info |
+| `lsblk` / `FS` | **`di`** | Display disk/partition info |
 | `uname` | **`rc`** | Display Root Core system info |
 | `whoami` | **`me`** | Display current user identity |
-| `nano` / `tte` | **`tte`** | Built-in Tiny Text Editor |
+| `nano` | **`tte`** | Built-in Tiny Text Editor |
 | `clear` | **`clear`** | Refresh the screen |
 | `echo` | **`echo`** | Print text to output |
 | `help` | **`help`** | Get command assistance |
