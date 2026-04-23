@@ -37,6 +37,11 @@ jobs:
           sudo apt update
           sudo apt install -y gcc binutils make grep coreutils cmake
 
+      - name: Clean build directory
+        if: steps.check_makefile.outputs.found == 'true'
+        run: |
+          make clean || true
+
       - name: Build Root Core
         if: steps.check_makefile.outputs.found == 'true'
         run: |
